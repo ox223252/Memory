@@ -64,8 +64,10 @@ int initMemory ( void ** const ptr, const bool exit, uint32_t size, const uint32
 
 	va_start ( list, depth );
 
+#ifdef __FREEONEXIT_H__
 	initFreeOnExit ( );
-
+#endif
+	
 	// init tab of length for each dimention
 	tabSize = malloc ( sizeof ( uint32_t ) * depth );
 	if ( !tabSize )
