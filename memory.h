@@ -30,8 +30,13 @@
 /// \depend freeOnExit
 ////////////////////////////////////////////////////////////////////////////////
 
-// uncomment or comment this line to use or not freeOnExit lib
+#ifndef MEM_WITH_FOE
+#define MEM_WITHOUT_FOE
+#endif
+
+#if defined(MEM_WITH_FOE) && !defined(MEM_WITHOUT_FOE)
 #include "../freeOnExit/freeOnExit.h"
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 // \fn int initMemory ( void ** const ptr, const bool exit, uint32_t size, 

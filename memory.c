@@ -22,6 +22,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+
 #include "memory.h"
 
 static int initSubMem ( void ** const ptr, const bool exit, const uint32_t size, const uint32_t length )
@@ -31,7 +32,7 @@ static int initSubMem ( void ** const ptr, const bool exit, const uint32_t size,
 	{
 		return ( __LINE__ );
 	}
-#ifdef __FREEONEXIT_H__
+#if defined(MEM_WITH_FOE) && !defined(MEM_WITHOUT_FOE)
 	else if ( exit &&
 		setFreeOnExit ( *ptr ) )
 	{
@@ -64,7 +65,7 @@ int initMemory ( void ** const ptr, const bool exit, uint32_t size, const uint32
 
 	va_start ( list, depth );
 
-#ifdef __FREEONEXIT_H__
+#if defined(MEM_WITH_FOE) && !defined(MEM_WITHOUT_FOE)
 	initFreeOnExit ( );
 #endif
 	
@@ -183,7 +184,7 @@ int main ( void )
 		}
 	}
 
-	// freeMemory ( ( void ** ) &ptr, 3 );
+	freeMemory ( ( void ** ) &ptr, 3 );
 	freeMemory ( ( void ** ) &ptr2, 1 );
 
 	return ( 0 );
